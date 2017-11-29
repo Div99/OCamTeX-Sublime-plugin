@@ -1,0 +1,6 @@
+{
+  "cmd": ["make", "pdf"],
+  "working_dir": "${project_path:${folder}}",
+  "file_regex": "^[ ]*File \"(...*?)\", line ([0-9]*)",
+  "selector": "source.otex"
+}

@@ -1,0 +1,4 @@
+[
+  { "keys": ["ctrl+a"], "command": "switch_file", "args": {"extensions": ["tex", "otex"]}},
+]
+

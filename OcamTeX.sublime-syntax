@@ -9,6 +9,7 @@ contexts:
   main:
     - include: math
     - include: modes
+    - include: variables
 
     # Strings begin and end with quotes, and use backslashes as an escape
     # character
@@ -65,6 +66,11 @@ contexts:
         - include: math-characters
         - include: math-numerics
         - include: modes
+        - include: variables
+
+  variables:
+    - match: '\B:\w+\b'
+      scope: variable.parameter.ocamtex
 
   math-operators:
     - match: \+|\-|=|-|\*|/|\^|_|<|>
