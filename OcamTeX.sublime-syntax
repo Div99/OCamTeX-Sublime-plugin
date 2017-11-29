@@ -1,0 +1,101 @@
+%YAML 1.2
+---
+# See http://www.sublimetext.com/docs/3/syntax.html
+name: OcamTeX
+file_extensions:
+  - otex
+scope: text.ocamtex
+contexts:
+  main:
+    - include: math
+    - include: modes
+
+    # Strings begin and end with quotes, and use backslashes as an escape
+    # character
+    - match: '"'
+      scope: punctuation.definition.string.begin.ocamtex
+      push: double_quoted_string
+
+    - match: '/\*'
+      scope: punctuation.definition.comment.begin.ocamtex
+      push: comment
+
+    # Comments begin with a '//' and finish at the end of the line
+    - match: '//'
+      scope: punctuation.definition.comment.ocamtex
+      push: line_comment
+
+    - match: '\B\|m\s\['
+      scope: meta. punctuation.definition.comment.begin.ocamtex
+      push: comment
+
+    # Keywords are if, else for and while.
+    # Note that blackslashes don't need to be escaped within single quoted
+    # strings in YAML. When using single quoted strings, only single quotes
+    # need to be escaped: this is done by using two single quotes next to each
+    # other.
+
+    - match: '\B\|(HEAD|BODY)\b'
+      scope: constant.other.ocamtex
+
+    - match: '\B\|item\b'
+      scope: support.type.ocamtex
+
+    - match: '\B\|\w+\b'
+      scope: keyword.control.flow.ocamtex
+
+    - match: '\B(-|\|item)\B'
+      scope: support.type.ocamtex
+
+    # Numbers
+    - match: '\b(-)?[0-9.]+\b'
+      scope: constant.numeric.ocamtex
+
+  math:
+    - match: '\B(\|m)\s\['
+      captures:
+         1: entity.name.type.ocamtex
+      scope: string.other.math.ocamtex punctuation.definition.string.begin.ocamtex
+      push:
+        - meta_scope: meta.environment.math.ocamtex
+        - match: '\]'
+          scope: string.other.math.ocamtex punctuation.definition.string.end.ocamtex
+          pop: true
+        - include: math-operators
+        - include: math-characters
+        - include: math-numerics
+        - include: modes
+
+  math-operators:
+    - match: \+|\-|=|-|\*|/|\^|_|<|>
+      scope: keyword.operator.math.ocamtex
+
+  math-numerics:
+    - match: '(([[:digit:]]*\.[[:digit:]]+)|[[:digit:]]+)'
+      scope: constant.numeric.math.tex
+
+  math-characters:
+    - match: "[A-Za-z]+"
+      scope: variable.other.math.tex
+
+  modes:
+    - match: '\B\|(m|t)\b'
+      scope: entity.name.type.ocamtex
+
+  double_quoted_string:
+    - meta_scope: string.quoted.double.ocamtex
+    - match: '\\.'
+      scope: constant.character.escape.ocamtex
+    - match: '"'
+      scope: punctuation.definition.string.end.ocamtex
+      pop: true
+
+  comment:
+    - meta_scope: comment.block.ocamtex
+    - match: '\*/'
+      pop: true
+
+  line_comment:
+    - meta_scope: comment.line.ocamtex
+    - match: $
+      pop: true
