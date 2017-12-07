@@ -1,0 +1,23 @@
+{
+    // The number of spaces a tab is considered equal to
+    "tab_size": 2,
+
+    // Set to true to insert spaces when tab is pressed
+    "translate_tabs_to_spaces": false,
+
+    // Calculates indentation automatically when pressing enter
+    "auto_indent": true,
+
+    // Makes auto indent a little smarter, e.g., by indenting the next line
+    // after an if statement in C. Requires auto_indent to be enabled.
+    "smart_indent": true,
+
+    // Trims white space added by auto_indent when moving the caret off the
+    // line.
+    "trim_automatic_white_space": true,
+
+    // Set to false to prevent word wrapped lines from being indented to the same
+    // level
+    "indent_subsequent_lines": true,
+
+}
