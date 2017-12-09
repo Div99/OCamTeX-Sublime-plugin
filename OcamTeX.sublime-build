@@ -1,8 +1,8 @@
 {
-  "cmd": ["./main.byte $file && open $file_base_name.pdf"],
+  "cmd": ["make main && ./main.byte $file_name && open $file_base_name.pdf"],
   "working_dir": "${project_path:${folder}}",
   "file_regex": "^[ ]*File \"(...*?)\", line ([0-9]*)",
-  "selector": "source.otex",
+  "selector": "text.ocamtex",
   "shell": true,
 
       "variants": [
@@ -13,7 +13,7 @@
         },
 
         { "name": "tex",
-          "cmd": ["./main.byte $file"],
+          "cmd": ["./main.byte $file_name"],
           "shell": true,
         },
     ]
