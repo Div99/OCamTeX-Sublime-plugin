@@ -1,21 +1,35 @@
 {
-  "cmd": ["make main && ./main.byte $file_name && open $file_base_name.pdf"],
+  "cmd": ["ocam $file_name && open $file_base_name.pdf"],
   "working_dir": "${project_path:${folder}}",
-  "file_regex": "^[ ]*File \"(...*?)\", line ([0-9]*)",
   "selector": "text.ocamtex",
   "shell": true,
 
-      "variants": [
+  "osx":
+    {
+      "file_regex": "^(...*?):([0-9]+): ([0-9]*)([^\\.]+)"
+    },
 
-        { "name": "main",
-          "cmd": ["make", "main"],
-          "shell": false,
-        },
+  "windows":
+    {
+      "file_regex": "^((?:.:)?[^:\n\r]*):([0-9]+):?([0-9]+)?:? (.*)$"
+    },
 
-        { "name": "tex",
-          "cmd": ["./main.byte $file_name"],
-          "shell": true,
-        },
-    ]
+  "linux":
+    {
+      "file_regex": "^(...*?):([0-9]+): ([0-9]*)([^\\.]+)"
+    },
+
+    "variants": [
+
+      { "name": "main",
+        "cmd": ["make", "main"],
+        "shell": false,
+      },
+
+      { "name": "tex",
+        "cmd": ["./main.byte $file_name"],
+        "shell": true,
+      },
+  ]
 
 }
